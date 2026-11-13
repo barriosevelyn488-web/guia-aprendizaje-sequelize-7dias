@@ -2,33 +2,37 @@ const express = require('express');
 const { sequelize } = require('./models');
 const estudiantesRoutes = require('./routes/estudiantes');
 const cursosRoutes = require('./routes/cursos');
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middlewares
+// Middlewares globales
 app.use(express.json());
 
-// Rutas
-app.use('/api/estudiantes', estudiantesRoutes);
-app.use('/api/cursos', cursosRoutes);
-
-// Ruta base con información de la API
-app.get('/', (req, res) => {
+// Ruta de health check / documentación rápida
+app.get('/api/health', (req, res) => {
   res.json({
-    mensaje: '🚀 API REST con Express y Sequelize lista',
-    guia: 'Ruta de Aprendizaje de 7 Días',
-    endpoints: {
-      estudiantes: '/api/estudiantes',
-      cursos: '/api/cursos'
-    }
+    status: 'ok',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
   });
 });
 
-// Sincronización con la Base de Datos y arranque del servidor
+// Rutas de recursos
+app.use('/api/estudiantes', estudiantesRoutes);
+app.use('/api/cursos', cursosRoutes);
+
+// Manejo de rutas inexistentes (404)
+app.use((req, res) => {
+  res.status(404).json({ status: 'fail', mensaje: 'Ruta no encontrada' });
+});
+
+// Middleware centralizado de manejo de errores (Clean Architecture / Best Practices)
+app.use(errorHandler);
+
 async function startServer() {
   try {
-    // Sincroniza los modelos con la base de datos (crea las tablas automáticamente)
     await sequelize.sync({ alter: true });
     console.log('✅ Base de datos SQLite sincronizada correctamente');
 
