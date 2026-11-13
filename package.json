@@ -1,0 +1,19 @@
+{
+  "name": "guia-aprendizaje-sequelize-7dias",
+  "version": "1.0.0",
+  "description": "Ruta de aprendizaje práctica en 7 días para dominar Sequelize y construir una API REST de Estudiantes y Cursos",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node src/seed.js"
+  },
+  "keywords": ["sequelize", "express", "sqlite", "api-rest", "tutorial", "7-days"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7"
+  }
+}

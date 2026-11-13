@@ -1,0 +1,73 @@
+{
+  "info": {
+    "name": "API Estudiantes y Cursos - Sequelize 7 Días",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Estudiantes",
+      "item": [
+        {
+          "name": "Obtener todos los estudiantes",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/estudiantes"
+          }
+        },
+        {
+          "name": "Crear estudiante",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Carlos Rodríguez\",\n  \"email\": \"carlos@example.com\",\n  \"edad\": 24\n}"
+            },
+            "url": "http://localhost:3000/api/estudiantes"
+          }
+        },
+        {
+          "name": "Inscribir estudiante a curso",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/estudiantes/1/cursos/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cursos",
+      "item": [
+        {
+          "name": "Obtener todos los cursos",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/cursos"
+          }
+        },
+        {
+          "name": "Crear curso",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Bases de Datos Relacionales\",\n  \"descripcion\": \"Diseño y normalización de BD\",\n  \"duracionSemanas\": 4\n}"
+            },
+            "url": "http://localhost:3000/api/cursos"
+          }
+        }
+      ]
+    }
+  ]
+}
